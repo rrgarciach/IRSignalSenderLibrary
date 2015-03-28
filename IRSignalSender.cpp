@@ -1,23 +1,22 @@
 #include "Arduino.h"
 #include "IRSignalSender.h"
 
-IRSignalSender::IRSignalSender(int pin)
+IRSignalSender::IRSignalSender(uint8_t pin)
 {
 	pinMode(pin,OUTPUT);
 	digitalWrite(pin, LOW);
-	// _NumIRsignals = 100;
 	_IRledPin = pin;
 }
 
-void IRSignalSender::sendCommand(int command)
+void IRSignalSender::sendCommand(uint8_t command)
 {
-	Serial.println("SENDING SIGNAL!");
+	// Serial.println("SENDING SIGNAL!");
 	parsePulse(command);
 	delay(5);
 	parsePulse(command);
 }
 
-void IRSignalSender::parsePulse(int command) {
+void IRSignalSender::parsePulse(uint8_t command) {
 	switch (command) {
 		case 0:
 			_NumIRsignals = cmd_on[0];
