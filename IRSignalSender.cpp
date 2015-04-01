@@ -10,7 +10,7 @@ IRSignalSender::IRSignalSender(uint8_t pin)
 
 void IRSignalSender::sendCommand(uint8_t command)
 {
-	// Serial.println("SENDING SIGNAL!");
+	Serial.println(F("SENDING SIGNAL!"));
 	parsePulse(command);
 	delay(5);
 	parsePulse(command);
@@ -18,6 +18,7 @@ void IRSignalSender::sendCommand(uint8_t command)
 
 void IRSignalSender::parsePulse(uint8_t command) {
 	switch (command) {
+		// TURN ON command:
 		case 0:
 			_NumIRsignals = cmd_on[0];
 			for (int i = 1; i < _NumIRsignals; i += 2) {
@@ -25,6 +26,7 @@ void IRSignalSender::parsePulse(uint8_t command) {
 				delayMicroseconds(cmd_on[i+1]*10);
 			}
 		break;
+		// TURN OFF command:
 		case 1:
 			_NumIRsignals = cmd_off[0];
 			for (int i = 1; i < _NumIRsignals; i += 2) {
